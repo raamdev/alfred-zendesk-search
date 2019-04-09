@@ -59,5 +59,5 @@ I generally use this workflow in one of two ways: to open a Zendesk ticket numbe
 
 ## Credits
 
-- Props to @trepmal for the initial inspiration to work on this project
-- Props to @pesla for the AppleScript and JavaScript idea https://gist.github.com/pesla/6ed38b2fd17b1bfdf515
+- Props to [@trepmal](https://github.com/trepmal) for the initial inspiration to work on this project
+- Props to [@pesla](https://github.com/pesla) for the AppleScript and JavaScript idea https://gist.github.com/pesla/6ed38b2fd17b1bfdf515
