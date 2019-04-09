@@ -31,13 +31,15 @@ If you search for anything that doesn't match the above ticket number or ticket 
 - `zd assignee:"Raam Dev" status:solved`
 - `zd status:open priority:urgent`
 
-## Required Permissions and Settings
+## ⚠️ Requirements
 
 Note that this workflow uses AppleScript and JavaScript and requires enabling a few things. 
 
 1. Allow JavaScript from Apple Events: `Google Chrome -> View -> Developer -> Allow JavaScript from Apple Events`
 2. Requires **Alfred 3** to have permission to control **Google Chrome** and **System Events** in `Security & Privacy -> Privacy -> Automation` (you'll get prompted for these permissions the first time you run the workflow). 
 3. Finally, it assumes that your browser is "Google Chrome".
+
+Note that this workflow also uses PHP and assumes that you have PHP installed at `/usr/bin/php`. 
 
 ## How I Use This Workflow
 
