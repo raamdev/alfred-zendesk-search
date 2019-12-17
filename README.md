@@ -41,6 +41,21 @@ Note that this workflow uses AppleScript and JavaScript and requires enabling a 
 
 Note that this workflow also uses PHP and assumes that you have PHP installed at `/usr/bin/php`. 
 
+## Initial Configuration
+
+When you first install the workflow, you'll see a window like the one below that lets you configure the variables associated with this workflow:
+
+![zendesk-search-alfred-setup](https://user-images.githubusercontent.com/53005/71024717-8f255c00-20d3-11ea-9cba-eff8a8d6d664.png)
+
+- `zendesk_url`: This should be set to your full Zendesk instance URL, e.g., `https://wordpressvip.zendesk.com`. This allows you to open ticket numbers using `zd 102453`.
+
+The next two variables are related to the workflow URL matching that lets you to copy a ticket URL and then open the ticket in your existing Zendesk tab (e.g., `zd http://vip-support.automattic.com/tickets/102894`). If you use multiple ticket URLs for the same Zendesk instance, you can use this to support all variations of your URL. 
+
+- `domain_regex`: This variable should be set to the applicable domains, separated with a `|` (OR regex character), e.g., `zendesk|automattic`.
+- `subdomain_regex`: This variable should be set to the applicable subdomains, separated with a `|` (OR regex character), e.g., `wordpressvip|vip-support`.
+
+If you only use one domain for your ticket URLs, you can simply omit the `|` and supply the appropriate domain and subdomain (e.g., `zendesk` and `wordpressvip`, or whatever your ZD instance subdomain is). 
+
 ## How I Use This Workflow
 
 I generally use this workflow in one of two ways: to open a Zendesk ticket number, or to open a Zendesk ticket URL. 
