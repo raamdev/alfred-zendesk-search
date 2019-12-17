@@ -74,7 +74,7 @@
 	<key>createdby</key>
 	<string>Raam Dev</string>
 	<key>description</key>
-	<string></string>
+	<string>Opens in your existing Zendesk tab!</string>
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
@@ -100,7 +100,7 @@ query=$1
 
 /usr/bin/osascript &lt;&lt; EOT
   set searchQuery to "$query"
-  set serverURI to "https://wordpressvip.zendesk.com"
+  set serverURI to (system attribute "zendesk_url")
   set browserURL to "/agent/search/1?q=" &amp; searchQuery
   set found to false
 
@@ -193,6 +193,8 @@ EOT</string>
 				<string>&lt;?php
 $query     = $argv[1];
 $query_url = rawurlencode( $query );
+$subdomain_regex = getenv('subdomain_regex');
+$domain_regex = getenv('domain_regex');
 
 // Matches variations of "#88888" or "#88888-z" or "88888" and captures just the ticket number
 $ticket_num_regex = '/^(?:\#?)(\d+)(?:\-?z?)$/';
@@ -204,7 +206,10 @@ $ticket_num_regex = '/^(?:\#?)(\d+)(?:\-?z?)$/';
 // http://vip-support.automattic.com/tickets/88888
 // https://wordpressvip.zendesk.com/agent/tickets/88888
 //
-$ticket_link_regex = '/^(?:https:\/\/href.li\/\?)?(?:http|https):\/\/(?:wordpressvip|vip-support)\.(?:zendesk|automattic)\.com\/(?:agent\/)?tickets\/(\d+)$/';
+// Configure 'subdomain_regex' and 'domain_regex' workflow environment variables 
+// to match your ZD instance and any variations of the URL that should be matched.
+//
+$ticket_link_regex = '/^(?:https:\/\/href.li\/\?)?(?:http|https):\/\/(?:'. $subdomain_regex .')\.(?:'. $domain_regex .')\.com\/(?:agent\/)?tickets\/(\d+)$/';
 
 if ( preg_match( $ticket_num_regex, $query )) {
 	echo preg_replace( $ticket_num_regex, '$1', $query );
@@ -286,7 +291,7 @@ query=$1
 
 /usr/bin/osascript &lt;&lt; EOT
   set ticketId to $query
-  set serverURI to "https://wordpressvip.zendesk.com"
+  set serverURI to (system attribute "zendesk_url")
   set browserURL to "/agent/tickets/" &amp; ticketId
   set found to false
 
@@ -351,7 +356,11 @@ EOT</string>
 		</dict>
 	</array>
 	<key>readme</key>
-	<string></string>
+	<string>Opens in your existing Zendesk tab!
+
+This is an Alfred workflow for opening Zendesk searches in an existing Zendesk tab. While there are plenty of Alfred Zendesk workflows that perform searches and open tickets in Zendesk, they all seem to have one annoying flaw: They open a completely new Zendesk instance in a new browser tab each time, ignoring any existing Zendesk tab. This results in lots of extra tabs and makes it harder to keep track of Zendesk-related tickets, searches, etc.
+
+This workflow solves this problem by using AppleScript and JavaScript to look for an existing Zendesk tab in Google Chrome and then uses that Zendesk instance to open a ticket or perform a search.💥</string>
 	<key>uidata</key>
 	<dict>
 		<key>3BDF17C2-81E2-421A-8D8B-5456DD860AE6</key>
@@ -397,7 +406,20 @@ EOT</string>
 			<integer>10</integer>
 		</dict>
 	</dict>
+	<key>variables</key>
+	<dict>
+		<key>domain_regex</key>
+		<string>zendesk|automattic</string>
+		<key>subdomain_regex</key>
+		<string>wordpressvip|vip-support</string>
+		<key>zendesk_url</key>
+		<string>https://wordpressvip.zendesk.com</string>
+	</dict>
+	<key>variablesdontexport</key>
+	<array/>
+	<key>version</key>
+	<string>1.0</string>
 	<key>webaddress</key>
-	<string></string>
+	<string>https://github.com/raamdev/alfred-zendesk-search</string>
 </dict>
 </plist>
